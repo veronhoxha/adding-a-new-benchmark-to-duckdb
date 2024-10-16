@@ -1,0 +1,5 @@
+.venv/
+.DS_Store
+databases/*
+data/*
+ads2024-ssb-dbgen

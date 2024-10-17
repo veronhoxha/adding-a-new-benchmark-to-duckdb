@@ -1,0 +1,376 @@
+Results for Query2 with scaling factor 1 and thread count 1:
+
+Run 1:
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0645s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│    UNGROUPED_AGGREGATE    │
+│    ────────────────────   │
+│    Aggregates: sum(#0)    │
+│                           │
+│           1 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│    (lo_extendedprice *    │
+│        lo_discount)       │
+│                           │
+│         4287 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│  lo_orderdate = d_datekey │
+│                           ├──────────────┐
+│   Build Min: 1992-01-01   │              │
+│   Build Max: 1998-12-30   │              │
+│                           │              │
+│         4287 Rows         │              │
+│          (0.00s)          │              │
+└─────────────┬─────────────┘              │
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│         lineorder         ││            date           │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│        lo_orderdate       ││         d_datekey         │
+│        lo_discount        ││                           │
+│      lo_extendedprice     ││          Filters:         │
+│                           ││ d_yearmonthnum=199401 AND │
+│          Filters:         ││ d_yearmonthnum IS NOT NULL│
+│     lo_discount>=4 AND    ││                           │
+│     lo_discount<=6 AND    ││                           │
+│   lo_discount IS NOT NULL ││                           │
+│    lo_quantity>=26 AND    ││                           │
+│     lo_quantity<=35 AND   ││                           │
+│   lo_quantity IS NOT NULL ││                           │
+│                           ││                           │
+│         4287 Rows         ││          31 Rows          │
+│          (0.06s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+
+
+Run 2:
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0242s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│    UNGROUPED_AGGREGATE    │
+│    ────────────────────   │
+│    Aggregates: sum(#0)    │
+│                           │
+│           1 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│    (lo_extendedprice *    │
+│        lo_discount)       │
+│                           │
+│         4287 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│  lo_orderdate = d_datekey │
+│                           ├──────────────┐
+│   Build Min: 1992-01-01   │              │
+│   Build Max: 1998-12-30   │              │
+│                           │              │
+│         4287 Rows         │              │
+│          (0.00s)          │              │
+└─────────────┬─────────────┘              │
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│         lineorder         ││            date           │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│        lo_orderdate       ││         d_datekey         │
+│        lo_discount        ││                           │
+│      lo_extendedprice     ││          Filters:         │
+│                           ││ d_yearmonthnum=199401 AND │
+│          Filters:         ││ d_yearmonthnum IS NOT NULL│
+│     lo_discount>=4 AND    ││                           │
+│     lo_discount<=6 AND    ││                           │
+│   lo_discount IS NOT NULL ││                           │
+│    lo_quantity>=26 AND    ││                           │
+│     lo_quantity<=35 AND   ││                           │
+│   lo_quantity IS NOT NULL ││                           │
+│                           ││                           │
+│         4287 Rows         ││          31 Rows          │
+│          (0.02s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+
+
+Run 3:
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0239s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│    UNGROUPED_AGGREGATE    │
+│    ────────────────────   │
+│    Aggregates: sum(#0)    │
+│                           │
+│           1 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│    (lo_extendedprice *    │
+│        lo_discount)       │
+│                           │
+│         4287 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│  lo_orderdate = d_datekey │
+│                           ├──────────────┐
+│   Build Min: 1992-01-01   │              │
+│   Build Max: 1998-12-30   │              │
+│                           │              │
+│         4287 Rows         │              │
+│          (0.00s)          │              │
+└─────────────┬─────────────┘              │
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│         lineorder         ││            date           │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│        lo_orderdate       ││         d_datekey         │
+│        lo_discount        ││                           │
+│      lo_extendedprice     ││          Filters:         │
+│                           ││ d_yearmonthnum=199401 AND │
+│          Filters:         ││ d_yearmonthnum IS NOT NULL│
+│     lo_discount>=4 AND    ││                           │
+│     lo_discount<=6 AND    ││                           │
+│   lo_discount IS NOT NULL ││                           │
+│    lo_quantity>=26 AND    ││                           │
+│     lo_quantity<=35 AND   ││                           │
+│   lo_quantity IS NOT NULL ││                           │
+│                           ││                           │
+│         4287 Rows         ││          31 Rows          │
+│          (0.02s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+
+
+Run 4:
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0232s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│    UNGROUPED_AGGREGATE    │
+│    ────────────────────   │
+│    Aggregates: sum(#0)    │
+│                           │
+│           1 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│    (lo_extendedprice *    │
+│        lo_discount)       │
+│                           │
+│         4287 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│  lo_orderdate = d_datekey │
+│                           ├──────────────┐
+│   Build Min: 1992-01-01   │              │
+│   Build Max: 1998-12-30   │              │
+│                           │              │
+│         4287 Rows         │              │
+│          (0.00s)          │              │
+└─────────────┬─────────────┘              │
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│         lineorder         ││            date           │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│        lo_orderdate       ││         d_datekey         │
+│        lo_discount        ││                           │
+│      lo_extendedprice     ││          Filters:         │
+│                           ││ d_yearmonthnum=199401 AND │
+│          Filters:         ││ d_yearmonthnum IS NOT NULL│
+│     lo_discount>=4 AND    ││                           │
+│     lo_discount<=6 AND    ││                           │
+│   lo_discount IS NOT NULL ││                           │
+│    lo_quantity>=26 AND    ││                           │
+│     lo_quantity<=35 AND   ││                           │
+│   lo_quantity IS NOT NULL ││                           │
+│                           ││                           │
+│         4287 Rows         ││          31 Rows          │
+│          (0.02s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+
+
+Run 5:
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0229s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│    UNGROUPED_AGGREGATE    │
+│    ────────────────────   │
+│    Aggregates: sum(#0)    │
+│                           │
+│           1 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│    (lo_extendedprice *    │
+│        lo_discount)       │
+│                           │
+│         4287 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│  lo_orderdate = d_datekey │
+│                           ├──────────────┐
+│   Build Min: 1992-01-01   │              │
+│   Build Max: 1998-12-30   │              │
+│                           │              │
+│         4287 Rows         │              │
+│          (0.00s)          │              │
+└─────────────┬─────────────┘              │
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│         lineorder         ││            date           │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│        lo_orderdate       ││         d_datekey         │
+│        lo_discount        ││                           │
+│      lo_extendedprice     ││          Filters:         │
+│                           ││ d_yearmonthnum=199401 AND │
+│          Filters:         ││ d_yearmonthnum IS NOT NULL│
+│     lo_discount>=4 AND    ││                           │
+│     lo_discount<=6 AND    ││                           │
+│   lo_discount IS NOT NULL ││                           │
+│    lo_quantity>=26 AND    ││                           │
+│     lo_quantity<=35 AND   ││                           │
+│   lo_quantity IS NOT NULL ││                           │
+│                           ││                           │
+│         4287 Rows         ││          31 Rows          │
+│          (0.02s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+

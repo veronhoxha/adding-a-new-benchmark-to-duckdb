@@ -1,0 +1,1011 @@
+Results for Query1 with scaling factor 1 and thread count 1:
+
+Run 1:
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE          SELECT               D_YEAR,               S_CITY,               P_BRAND,               sum(LO_REVENUE - LO_SUPPLYCOST) AS profit         FROM               date,               customer,               supplier,               part,               lineorder         WHERE               LO_CUSTKEY = C_CUSTKEY               AND LO_SUPPKEY = S_SUPPKEY               AND LO_PARTKEY = P_PARTKEY               AND LO_ORDERDATE = D_DATEKEY               AND C_REGION = 'AMERICA'               AND S_NATION = 'UNITED STATES'               AND (D_YEAR = 1997 OR D_YEAR = 1998)               AND P_CATEGORY = 'MFGR#14'         GROUP BY               D_YEAR,               S_CITY,               P_BRAND         ORDER BY               D_YEAR,               S_CITY,               P_BRAND         
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.125s              ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_integ│
+│   ral_integer(#0, 1992)   │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│          ORDER_BY         │
+│    ────────────────────   │
+│      date.D_YEAR ASC      │
+│    supplier.S_CITY ASC    │
+│      part.P_BRAND ASC     │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_integra│
+│    l_utinyint(#0, 1992)   │
+│__internal_compress_string_│
+│        hugeint(#1)        │
+│__internal_compress_string_│
+│        hugeint(#2)        │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_integ│
+│   ral_integer(#0, 1992)   │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       HASH_GROUP_BY       │
+│    ────────────────────   │
+│          Groups:          │
+│             #0            │
+│             #1            │
+│             #2            │
+│                           │
+│    Aggregates: sum(#3)    │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│           d_year          │
+│           s_city          │
+│          p_brand          │
+│       (lo_revenue -       │
+│       lo_supplycost)      │
+│                           │
+│          468 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_integra│
+│     l_usmallint(#0, 1)    │
+│__internal_compress_integra│
+│     l_usmallint(#1, 1)    │
+│             #2            │
+│             #3            │
+│             #4            │
+│             #5            │
+│             #6            │
+│__internal_compress_string_│
+│        hugeint(#7)        │
+│__internal_compress_integra│
+│     l_usmallint(#8, 1)    │
+│__internal_compress_string_│
+│        hugeint(#9)        │
+│            #10            │
+│__internal_compress_integra│
+│   l_utinyint(#11, 1992)   │
+│__internal_compress_integra│
+│    l_usmallint(#12, 1)    │
+│                           │
+│          468 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│   lo_custkey = c_custkey  │
+│                           ├─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│        Build Min: 1       │                                                                                                     │
+│      Build Max: 29999     │                                                                                                     │
+│                           │                                                                                                     │
+│          468 Rows         │                                                                                                     │
+│          (0.00s)          │                                                                                                     │
+└─────────────┬─────────────┘                                                                                                     │
+┌─────────────┴─────────────┐                                                                                       ┌─────────────┴─────────────┐
+│         HASH_JOIN         │                                                                                       │           FILTER          │
+│    ────────────────────   │                                                                                       │    ────────────────────   │
+│      Join Type: INNER     │                                                                                       │    (c_custkey <= 29999)   │
+│                           │                                                                                       │                           │
+│        Conditions:        │                                                                                       │                           │
+│  lo_orderdate = d_datekey │                                                                                       │                           │
+│                           ├────────────────────────────────────────────────────────────────────────┐              │                           │
+│   Build Min: 1992-01-01   │                                                                        │              │                           │
+│   Build Max: 1998-12-30   │                                                                        │              │                           │
+│                           │                                                                        │              │                           │
+│         2173 Rows         │                                                                        │              │         5992 Rows         │
+│          (0.00s)          │                                                                        │              │          (0.00s)          │
+└─────────────┬─────────────┘                                                                        │              └─────────────┬─────────────┘
+┌─────────────┴─────────────┐                                                          ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         HASH_JOIN         │                                                          │           FILTER          ││         TABLE_SCAN        │
+│    ────────────────────   │                                                          │    ────────────────────   ││    ────────────────────   │
+│      Join Type: INNER     │                                                          │    ((d_year = 1997) OR    ││          customer         │
+│                           │                                                          │      (d_year = 1998))     ││                           │
+│        Conditions:        │                                                          │                           ││        Projections:       │
+│   lo_suppkey = s_suppkey  │                                                          │                           ││         c_custkey         │
+│                           ├───────────────────────────────────────────┐              │                           ││                           │
+│        Build Min: 1       │                                           │              │                           ││          Filters:         │
+│      Build Max: 2000      │                                           │              │                           ││   c_region='AMERICA' AND  │
+│                           │                                           │              │                           ││    c_region IS NOT NULL   │
+│                           │                                           │              │                           ││                           │
+│         2173 Rows         │                                           │              │          729 Rows         ││         5992 Rows         │
+│          (0.00s)          │                                           │              │          (0.00s)          ││          (0.00s)          │
+└─────────────┬─────────────┘                                           │              └─────────────┬─────────────┘└───────────────────────────┘
+┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         HASH_JOIN         │                             │         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   │                             │    ────────────────────   ││    ────────────────────   │
+│      Join Type: INNER     │                             │          supplier         ││            date           │
+│                           │                             │                           ││                           │
+│        Conditions:        │                             │        Projections:       ││        Projections:       │
+│   lo_partkey = p_partkey  │                             │         s_suppkey         ││         d_datekey         │
+│                           │                             │           s_city          ││           d_year          │
+│        Build Min: 1       ├──────────────┐              │                           ││                           │
+│     Build Max: 200000     │              │              │          Filters:         ││                           │
+│                           │              │              │  s_nation='UNITED STATES' ││                           │
+│                           │              │              │  AND s_nation IS NOT NULL ││                           │
+│                           │              │              │                           ││                           │
+│         56942 Rows        │              │              │          76 Rows          ││         2556 Rows         │
+│          (0.01s)          │              │              │          (0.00s)          ││          (0.00s)          │
+└─────────────┬─────────────┘              │              └───────────────────────────┘└───────────────────────────┘
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│         lineorder         ││            part           │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│         lo_custkey        ││         p_partkey         │
+│         lo_suppkey        ││          p_brand          │
+│         lo_partkey        ││                           │
+│        lo_orderdate       ││          Filters:         │
+│         lo_revenue        ││  p_category='MFGR#14' AND │
+│       lo_supplycost       ││   p_category IS NOT NULL  │
+│                           ││                           │
+│        1426993 Rows       ││         8029 Rows         │
+│          (0.11s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+
+
+Run 2:
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE          SELECT               D_YEAR,               S_CITY,               P_BRAND,               sum(LO_REVENUE - LO_SUPPLYCOST) AS profit         FROM               date,               customer,               supplier,               part,               lineorder         WHERE               LO_CUSTKEY = C_CUSTKEY               AND LO_SUPPKEY = S_SUPPKEY               AND LO_PARTKEY = P_PARTKEY               AND LO_ORDERDATE = D_DATEKEY               AND C_REGION = 'AMERICA'               AND S_NATION = 'UNITED STATES'               AND (D_YEAR = 1997 OR D_YEAR = 1998)               AND P_CATEGORY = 'MFGR#14'         GROUP BY               D_YEAR,               S_CITY,               P_BRAND         ORDER BY               D_YEAR,               S_CITY,               P_BRAND         
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0493s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_integ│
+│   ral_integer(#0, 1992)   │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│          ORDER_BY         │
+│    ────────────────────   │
+│      date.D_YEAR ASC      │
+│    supplier.S_CITY ASC    │
+│      part.P_BRAND ASC     │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_integra│
+│    l_utinyint(#0, 1992)   │
+│__internal_compress_string_│
+│        hugeint(#1)        │
+│__internal_compress_string_│
+│        hugeint(#2)        │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_integ│
+│   ral_integer(#0, 1992)   │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       HASH_GROUP_BY       │
+│    ────────────────────   │
+│          Groups:          │
+│             #0            │
+│             #1            │
+│             #2            │
+│                           │
+│    Aggregates: sum(#3)    │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│           d_year          │
+│           s_city          │
+│          p_brand          │
+│       (lo_revenue -       │
+│       lo_supplycost)      │
+│                           │
+│          468 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_integra│
+│     l_usmallint(#0, 1)    │
+│__internal_compress_integra│
+│     l_usmallint(#1, 1)    │
+│             #2            │
+│             #3            │
+│             #4            │
+│             #5            │
+│             #6            │
+│__internal_compress_string_│
+│        hugeint(#7)        │
+│__internal_compress_integra│
+│     l_usmallint(#8, 1)    │
+│__internal_compress_string_│
+│        hugeint(#9)        │
+│            #10            │
+│__internal_compress_integra│
+│   l_utinyint(#11, 1992)   │
+│__internal_compress_integra│
+│    l_usmallint(#12, 1)    │
+│                           │
+│          468 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│   lo_custkey = c_custkey  │
+│                           ├─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│        Build Min: 1       │                                                                                                     │
+│      Build Max: 29999     │                                                                                                     │
+│                           │                                                                                                     │
+│          468 Rows         │                                                                                                     │
+│          (0.00s)          │                                                                                                     │
+└─────────────┬─────────────┘                                                                                                     │
+┌─────────────┴─────────────┐                                                                                       ┌─────────────┴─────────────┐
+│         HASH_JOIN         │                                                                                       │           FILTER          │
+│    ────────────────────   │                                                                                       │    ────────────────────   │
+│      Join Type: INNER     │                                                                                       │    (c_custkey <= 29999)   │
+│                           │                                                                                       │                           │
+│        Conditions:        │                                                                                       │                           │
+│  lo_orderdate = d_datekey │                                                                                       │                           │
+│                           ├────────────────────────────────────────────────────────────────────────┐              │                           │
+│   Build Min: 1992-01-01   │                                                                        │              │                           │
+│   Build Max: 1998-12-30   │                                                                        │              │                           │
+│                           │                                                                        │              │                           │
+│         2173 Rows         │                                                                        │              │         5992 Rows         │
+│          (0.00s)          │                                                                        │              │          (0.00s)          │
+└─────────────┬─────────────┘                                                                        │              └─────────────┬─────────────┘
+┌─────────────┴─────────────┐                                                          ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         HASH_JOIN         │                                                          │           FILTER          ││         TABLE_SCAN        │
+│    ────────────────────   │                                                          │    ────────────────────   ││    ────────────────────   │
+│      Join Type: INNER     │                                                          │    ((d_year = 1997) OR    ││          customer         │
+│                           │                                                          │      (d_year = 1998))     ││                           │
+│        Conditions:        │                                                          │                           ││        Projections:       │
+│   lo_suppkey = s_suppkey  │                                                          │                           ││         c_custkey         │
+│                           ├───────────────────────────────────────────┐              │                           ││                           │
+│        Build Min: 1       │                                           │              │                           ││          Filters:         │
+│      Build Max: 2000      │                                           │              │                           ││   c_region='AMERICA' AND  │
+│                           │                                           │              │                           ││    c_region IS NOT NULL   │
+│                           │                                           │              │                           ││                           │
+│         2173 Rows         │                                           │              │          729 Rows         ││         5992 Rows         │
+│          (0.00s)          │                                           │              │          (0.00s)          ││          (0.00s)          │
+└─────────────┬─────────────┘                                           │              └─────────────┬─────────────┘└───────────────────────────┘
+┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         HASH_JOIN         │                             │         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   │                             │    ────────────────────   ││    ────────────────────   │
+│      Join Type: INNER     │                             │          supplier         ││            date           │
+│                           │                             │                           ││                           │
+│        Conditions:        │                             │        Projections:       ││        Projections:       │
+│   lo_partkey = p_partkey  │                             │         s_suppkey         ││         d_datekey         │
+│                           │                             │           s_city          ││           d_year          │
+│        Build Min: 1       ├──────────────┐              │                           ││                           │
+│     Build Max: 200000     │              │              │          Filters:         ││                           │
+│                           │              │              │  s_nation='UNITED STATES' ││                           │
+│                           │              │              │  AND s_nation IS NOT NULL ││                           │
+│                           │              │              │                           ││                           │
+│         56942 Rows        │              │              │          76 Rows          ││         2556 Rows         │
+│          (0.01s)          │              │              │          (0.00s)          ││          (0.00s)          │
+└─────────────┬─────────────┘              │              └───────────────────────────┘└───────────────────────────┘
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│         lineorder         ││            part           │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│         lo_custkey        ││         p_partkey         │
+│         lo_suppkey        ││          p_brand          │
+│         lo_partkey        ││                           │
+│        lo_orderdate       ││          Filters:         │
+│         lo_revenue        ││  p_category='MFGR#14' AND │
+│       lo_supplycost       ││   p_category IS NOT NULL  │
+│                           ││                           │
+│        1426993 Rows       ││         8029 Rows         │
+│          (0.04s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+
+
+Run 3:
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE          SELECT               D_YEAR,               S_CITY,               P_BRAND,               sum(LO_REVENUE - LO_SUPPLYCOST) AS profit         FROM               date,               customer,               supplier,               part,               lineorder         WHERE               LO_CUSTKEY = C_CUSTKEY               AND LO_SUPPKEY = S_SUPPKEY               AND LO_PARTKEY = P_PARTKEY               AND LO_ORDERDATE = D_DATEKEY               AND C_REGION = 'AMERICA'               AND S_NATION = 'UNITED STATES'               AND (D_YEAR = 1997 OR D_YEAR = 1998)               AND P_CATEGORY = 'MFGR#14'         GROUP BY               D_YEAR,               S_CITY,               P_BRAND         ORDER BY               D_YEAR,               S_CITY,               P_BRAND         
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0489s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_integ│
+│   ral_integer(#0, 1992)   │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│          ORDER_BY         │
+│    ────────────────────   │
+│      date.D_YEAR ASC      │
+│    supplier.S_CITY ASC    │
+│      part.P_BRAND ASC     │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_integra│
+│    l_utinyint(#0, 1992)   │
+│__internal_compress_string_│
+│        hugeint(#1)        │
+│__internal_compress_string_│
+│        hugeint(#2)        │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_integ│
+│   ral_integer(#0, 1992)   │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       HASH_GROUP_BY       │
+│    ────────────────────   │
+│          Groups:          │
+│             #0            │
+│             #1            │
+│             #2            │
+│                           │
+│    Aggregates: sum(#3)    │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│           d_year          │
+│           s_city          │
+│          p_brand          │
+│       (lo_revenue -       │
+│       lo_supplycost)      │
+│                           │
+│          468 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_integra│
+│     l_usmallint(#0, 1)    │
+│__internal_compress_integra│
+│     l_usmallint(#1, 1)    │
+│             #2            │
+│             #3            │
+│             #4            │
+│             #5            │
+│             #6            │
+│__internal_compress_string_│
+│        hugeint(#7)        │
+│__internal_compress_integra│
+│     l_usmallint(#8, 1)    │
+│__internal_compress_string_│
+│        hugeint(#9)        │
+│            #10            │
+│__internal_compress_integra│
+│   l_utinyint(#11, 1992)   │
+│__internal_compress_integra│
+│    l_usmallint(#12, 1)    │
+│                           │
+│          468 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│   lo_custkey = c_custkey  │
+│                           ├─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│        Build Min: 1       │                                                                                                     │
+│      Build Max: 29999     │                                                                                                     │
+│                           │                                                                                                     │
+│          468 Rows         │                                                                                                     │
+│          (0.00s)          │                                                                                                     │
+└─────────────┬─────────────┘                                                                                                     │
+┌─────────────┴─────────────┐                                                                                       ┌─────────────┴─────────────┐
+│         HASH_JOIN         │                                                                                       │           FILTER          │
+│    ────────────────────   │                                                                                       │    ────────────────────   │
+│      Join Type: INNER     │                                                                                       │    (c_custkey <= 29999)   │
+│                           │                                                                                       │                           │
+│        Conditions:        │                                                                                       │                           │
+│  lo_orderdate = d_datekey │                                                                                       │                           │
+│                           ├────────────────────────────────────────────────────────────────────────┐              │                           │
+│   Build Min: 1992-01-01   │                                                                        │              │                           │
+│   Build Max: 1998-12-30   │                                                                        │              │                           │
+│                           │                                                                        │              │                           │
+│         2173 Rows         │                                                                        │              │         5992 Rows         │
+│          (0.00s)          │                                                                        │              │          (0.00s)          │
+└─────────────┬─────────────┘                                                                        │              └─────────────┬─────────────┘
+┌─────────────┴─────────────┐                                                          ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         HASH_JOIN         │                                                          │           FILTER          ││         TABLE_SCAN        │
+│    ────────────────────   │                                                          │    ────────────────────   ││    ────────────────────   │
+│      Join Type: INNER     │                                                          │    ((d_year = 1997) OR    ││          customer         │
+│                           │                                                          │      (d_year = 1998))     ││                           │
+│        Conditions:        │                                                          │                           ││        Projections:       │
+│   lo_suppkey = s_suppkey  │                                                          │                           ││         c_custkey         │
+│                           ├───────────────────────────────────────────┐              │                           ││                           │
+│        Build Min: 1       │                                           │              │                           ││          Filters:         │
+│      Build Max: 2000      │                                           │              │                           ││   c_region='AMERICA' AND  │
+│                           │                                           │              │                           ││    c_region IS NOT NULL   │
+│                           │                                           │              │                           ││                           │
+│         2173 Rows         │                                           │              │          729 Rows         ││         5992 Rows         │
+│          (0.00s)          │                                           │              │          (0.00s)          ││          (0.00s)          │
+└─────────────┬─────────────┘                                           │              └─────────────┬─────────────┘└───────────────────────────┘
+┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         HASH_JOIN         │                             │         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   │                             │    ────────────────────   ││    ────────────────────   │
+│      Join Type: INNER     │                             │          supplier         ││            date           │
+│                           │                             │                           ││                           │
+│        Conditions:        │                             │        Projections:       ││        Projections:       │
+│   lo_partkey = p_partkey  │                             │         s_suppkey         ││         d_datekey         │
+│                           │                             │           s_city          ││           d_year          │
+│        Build Min: 1       ├──────────────┐              │                           ││                           │
+│     Build Max: 200000     │              │              │          Filters:         ││                           │
+│                           │              │              │  s_nation='UNITED STATES' ││                           │
+│                           │              │              │  AND s_nation IS NOT NULL ││                           │
+│                           │              │              │                           ││                           │
+│         56942 Rows        │              │              │          76 Rows          ││         2556 Rows         │
+│          (0.01s)          │              │              │          (0.00s)          ││          (0.00s)          │
+└─────────────┬─────────────┘              │              └───────────────────────────┘└───────────────────────────┘
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│         lineorder         ││            part           │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│         lo_custkey        ││         p_partkey         │
+│         lo_suppkey        ││          p_brand          │
+│         lo_partkey        ││                           │
+│        lo_orderdate       ││          Filters:         │
+│         lo_revenue        ││  p_category='MFGR#14' AND │
+│       lo_supplycost       ││   p_category IS NOT NULL  │
+│                           ││                           │
+│        1426993 Rows       ││         8029 Rows         │
+│          (0.04s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+
+
+Run 4:
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE          SELECT               D_YEAR,               S_CITY,               P_BRAND,               sum(LO_REVENUE - LO_SUPPLYCOST) AS profit         FROM               date,               customer,               supplier,               part,               lineorder         WHERE               LO_CUSTKEY = C_CUSTKEY               AND LO_SUPPKEY = S_SUPPKEY               AND LO_PARTKEY = P_PARTKEY               AND LO_ORDERDATE = D_DATEKEY               AND C_REGION = 'AMERICA'               AND S_NATION = 'UNITED STATES'               AND (D_YEAR = 1997 OR D_YEAR = 1998)               AND P_CATEGORY = 'MFGR#14'         GROUP BY               D_YEAR,               S_CITY,               P_BRAND         ORDER BY               D_YEAR,               S_CITY,               P_BRAND         
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0478s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_integ│
+│   ral_integer(#0, 1992)   │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│          ORDER_BY         │
+│    ────────────────────   │
+│      date.D_YEAR ASC      │
+│    supplier.S_CITY ASC    │
+│      part.P_BRAND ASC     │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_integra│
+│    l_utinyint(#0, 1992)   │
+│__internal_compress_string_│
+│        hugeint(#1)        │
+│__internal_compress_string_│
+│        hugeint(#2)        │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_integ│
+│   ral_integer(#0, 1992)   │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       HASH_GROUP_BY       │
+│    ────────────────────   │
+│          Groups:          │
+│             #0            │
+│             #1            │
+│             #2            │
+│                           │
+│    Aggregates: sum(#3)    │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│           d_year          │
+│           s_city          │
+│          p_brand          │
+│       (lo_revenue -       │
+│       lo_supplycost)      │
+│                           │
+│          468 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_integra│
+│     l_usmallint(#0, 1)    │
+│__internal_compress_integra│
+│     l_usmallint(#1, 1)    │
+│             #2            │
+│             #3            │
+│             #4            │
+│             #5            │
+│             #6            │
+│__internal_compress_string_│
+│        hugeint(#7)        │
+│__internal_compress_integra│
+│     l_usmallint(#8, 1)    │
+│__internal_compress_string_│
+│        hugeint(#9)        │
+│            #10            │
+│__internal_compress_integra│
+│   l_utinyint(#11, 1992)   │
+│__internal_compress_integra│
+│    l_usmallint(#12, 1)    │
+│                           │
+│          468 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│   lo_custkey = c_custkey  │
+│                           ├─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│        Build Min: 1       │                                                                                                     │
+│      Build Max: 29999     │                                                                                                     │
+│                           │                                                                                                     │
+│          468 Rows         │                                                                                                     │
+│          (0.00s)          │                                                                                                     │
+└─────────────┬─────────────┘                                                                                                     │
+┌─────────────┴─────────────┐                                                                                       ┌─────────────┴─────────────┐
+│         HASH_JOIN         │                                                                                       │           FILTER          │
+│    ────────────────────   │                                                                                       │    ────────────────────   │
+│      Join Type: INNER     │                                                                                       │    (c_custkey <= 29999)   │
+│                           │                                                                                       │                           │
+│        Conditions:        │                                                                                       │                           │
+│  lo_orderdate = d_datekey │                                                                                       │                           │
+│                           ├────────────────────────────────────────────────────────────────────────┐              │                           │
+│   Build Min: 1992-01-01   │                                                                        │              │                           │
+│   Build Max: 1998-12-30   │                                                                        │              │                           │
+│                           │                                                                        │              │                           │
+│         2173 Rows         │                                                                        │              │         5992 Rows         │
+│          (0.00s)          │                                                                        │              │          (0.00s)          │
+└─────────────┬─────────────┘                                                                        │              └─────────────┬─────────────┘
+┌─────────────┴─────────────┐                                                          ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         HASH_JOIN         │                                                          │           FILTER          ││         TABLE_SCAN        │
+│    ────────────────────   │                                                          │    ────────────────────   ││    ────────────────────   │
+│      Join Type: INNER     │                                                          │    ((d_year = 1997) OR    ││          customer         │
+│                           │                                                          │      (d_year = 1998))     ││                           │
+│        Conditions:        │                                                          │                           ││        Projections:       │
+│   lo_suppkey = s_suppkey  │                                                          │                           ││         c_custkey         │
+│                           ├───────────────────────────────────────────┐              │                           ││                           │
+│        Build Min: 1       │                                           │              │                           ││          Filters:         │
+│      Build Max: 2000      │                                           │              │                           ││   c_region='AMERICA' AND  │
+│                           │                                           │              │                           ││    c_region IS NOT NULL   │
+│                           │                                           │              │                           ││                           │
+│         2173 Rows         │                                           │              │          729 Rows         ││         5992 Rows         │
+│          (0.00s)          │                                           │              │          (0.00s)          ││          (0.00s)          │
+└─────────────┬─────────────┘                                           │              └─────────────┬─────────────┘└───────────────────────────┘
+┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         HASH_JOIN         │                             │         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   │                             │    ────────────────────   ││    ────────────────────   │
+│      Join Type: INNER     │                             │          supplier         ││            date           │
+│                           │                             │                           ││                           │
+│        Conditions:        │                             │        Projections:       ││        Projections:       │
+│   lo_partkey = p_partkey  │                             │         s_suppkey         ││         d_datekey         │
+│                           │                             │           s_city          ││           d_year          │
+│        Build Min: 1       ├──────────────┐              │                           ││                           │
+│     Build Max: 200000     │              │              │          Filters:         ││                           │
+│                           │              │              │  s_nation='UNITED STATES' ││                           │
+│                           │              │              │  AND s_nation IS NOT NULL ││                           │
+│                           │              │              │                           ││                           │
+│         56942 Rows        │              │              │          76 Rows          ││         2556 Rows         │
+│          (0.01s)          │              │              │          (0.00s)          ││          (0.00s)          │
+└─────────────┬─────────────┘              │              └───────────────────────────┘└───────────────────────────┘
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│         lineorder         ││            part           │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│         lo_custkey        ││         p_partkey         │
+│         lo_suppkey        ││          p_brand          │
+│         lo_partkey        ││                           │
+│        lo_orderdate       ││          Filters:         │
+│         lo_revenue        ││  p_category='MFGR#14' AND │
+│       lo_supplycost       ││   p_category IS NOT NULL  │
+│                           ││                           │
+│        1426993 Rows       ││         8029 Rows         │
+│          (0.04s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+
+
+Run 5:
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE          SELECT               D_YEAR,               S_CITY,               P_BRAND,               sum(LO_REVENUE - LO_SUPPLYCOST) AS profit         FROM               date,               customer,               supplier,               part,               lineorder         WHERE               LO_CUSTKEY = C_CUSTKEY               AND LO_SUPPKEY = S_SUPPKEY               AND LO_PARTKEY = P_PARTKEY               AND LO_ORDERDATE = D_DATEKEY               AND C_REGION = 'AMERICA'               AND S_NATION = 'UNITED STATES'               AND (D_YEAR = 1997 OR D_YEAR = 1998)               AND P_CATEGORY = 'MFGR#14'         GROUP BY               D_YEAR,               S_CITY,               P_BRAND         ORDER BY               D_YEAR,               S_CITY,               P_BRAND         
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0472s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_integ│
+│   ral_integer(#0, 1992)   │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│          ORDER_BY         │
+│    ────────────────────   │
+│      date.D_YEAR ASC      │
+│    supplier.S_CITY ASC    │
+│      part.P_BRAND ASC     │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_integra│
+│    l_utinyint(#0, 1992)   │
+│__internal_compress_string_│
+│        hugeint(#1)        │
+│__internal_compress_string_│
+│        hugeint(#2)        │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_integ│
+│   ral_integer(#0, 1992)   │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       HASH_GROUP_BY       │
+│    ────────────────────   │
+│          Groups:          │
+│             #0            │
+│             #1            │
+│             #2            │
+│                           │
+│    Aggregates: sum(#3)    │
+│                           │
+│          330 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│           d_year          │
+│           s_city          │
+│          p_brand          │
+│       (lo_revenue -       │
+│       lo_supplycost)      │
+│                           │
+│          468 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_integra│
+│     l_usmallint(#0, 1)    │
+│__internal_compress_integra│
+│     l_usmallint(#1, 1)    │
+│             #2            │
+│             #3            │
+│             #4            │
+│             #5            │
+│             #6            │
+│__internal_compress_string_│
+│        hugeint(#7)        │
+│__internal_compress_integra│
+│     l_usmallint(#8, 1)    │
+│__internal_compress_string_│
+│        hugeint(#9)        │
+│            #10            │
+│__internal_compress_integra│
+│   l_utinyint(#11, 1992)   │
+│__internal_compress_integra│
+│    l_usmallint(#12, 1)    │
+│                           │
+│          468 Rows         │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│   lo_custkey = c_custkey  │
+│                           ├─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│        Build Min: 1       │                                                                                                     │
+│      Build Max: 29999     │                                                                                                     │
+│                           │                                                                                                     │
+│          468 Rows         │                                                                                                     │
+│          (0.00s)          │                                                                                                     │
+└─────────────┬─────────────┘                                                                                                     │
+┌─────────────┴─────────────┐                                                                                       ┌─────────────┴─────────────┐
+│         HASH_JOIN         │                                                                                       │           FILTER          │
+│    ────────────────────   │                                                                                       │    ────────────────────   │
+│      Join Type: INNER     │                                                                                       │    (c_custkey <= 29999)   │
+│                           │                                                                                       │                           │
+│        Conditions:        │                                                                                       │                           │
+│  lo_orderdate = d_datekey │                                                                                       │                           │
+│                           ├────────────────────────────────────────────────────────────────────────┐              │                           │
+│   Build Min: 1992-01-01   │                                                                        │              │                           │
+│   Build Max: 1998-12-30   │                                                                        │              │                           │
+│                           │                                                                        │              │                           │
+│         2173 Rows         │                                                                        │              │         5992 Rows         │
+│          (0.00s)          │                                                                        │              │          (0.00s)          │
+└─────────────┬─────────────┘                                                                        │              └─────────────┬─────────────┘
+┌─────────────┴─────────────┐                                                          ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         HASH_JOIN         │                                                          │           FILTER          ││         TABLE_SCAN        │
+│    ────────────────────   │                                                          │    ────────────────────   ││    ────────────────────   │
+│      Join Type: INNER     │                                                          │    ((d_year = 1997) OR    ││          customer         │
+│                           │                                                          │      (d_year = 1998))     ││                           │
+│        Conditions:        │                                                          │                           ││        Projections:       │
+│   lo_suppkey = s_suppkey  │                                                          │                           ││         c_custkey         │
+│                           ├───────────────────────────────────────────┐              │                           ││                           │
+│        Build Min: 1       │                                           │              │                           ││          Filters:         │
+│      Build Max: 2000      │                                           │              │                           ││   c_region='AMERICA' AND  │
+│                           │                                           │              │                           ││    c_region IS NOT NULL   │
+│                           │                                           │              │                           ││                           │
+│         2173 Rows         │                                           │              │          729 Rows         ││         5992 Rows         │
+│          (0.00s)          │                                           │              │          (0.00s)          ││          (0.00s)          │
+└─────────────┬─────────────┘                                           │              └─────────────┬─────────────┘└───────────────────────────┘
+┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         HASH_JOIN         │                             │         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   │                             │    ────────────────────   ││    ────────────────────   │
+│      Join Type: INNER     │                             │          supplier         ││            date           │
+│                           │                             │                           ││                           │
+│        Conditions:        │                             │        Projections:       ││        Projections:       │
+│   lo_partkey = p_partkey  │                             │         s_suppkey         ││         d_datekey         │
+│                           │                             │           s_city          ││           d_year          │
+│        Build Min: 1       ├──────────────┐              │                           ││                           │
+│     Build Max: 200000     │              │              │          Filters:         ││                           │
+│                           │              │              │  s_nation='UNITED STATES' ││                           │
+│                           │              │              │  AND s_nation IS NOT NULL ││                           │
+│                           │              │              │                           ││                           │
+│         56942 Rows        │              │              │          76 Rows          ││         2556 Rows         │
+│          (0.01s)          │              │              │          (0.00s)          ││          (0.00s)          │
+└─────────────┬─────────────┘              │              └───────────────────────────┘└───────────────────────────┘
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│         lineorder         ││            part           │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│         lo_custkey        ││         p_partkey         │
+│         lo_suppkey        ││          p_brand          │
+│         lo_partkey        ││                           │
+│        lo_orderdate       ││          Filters:         │
+│         lo_revenue        ││  p_category='MFGR#14' AND │
+│       lo_supplycost       ││   p_category IS NOT NULL  │
+│                           ││                           │
+│        1426993 Rows       ││         8029 Rows         │
+│          (0.04s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+

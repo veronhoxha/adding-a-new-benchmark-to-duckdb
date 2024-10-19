@@ -9,7 +9,7 @@ Run 1:
 EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0393s             ││
+││              Total Time: 0.0395s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -84,7 +84,7 @@ Run 2:
 EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0396s             ││
+││              Total Time: 0.0403s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -159,7 +159,7 @@ Run 3:
 EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0393s             ││
+││              Total Time: 0.0404s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -234,7 +234,7 @@ Run 4:
 EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0395s             ││
+││              Total Time: 0.0397s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -309,7 +309,7 @@ Run 5:
 EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0394s             ││
+││              Total Time: 0.0421s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -371,6 +371,6 @@ EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) 
 │   lo_quantity IS NOT NULL ││                           │
 │                           ││                           │
 │         42532 Rows        ││          31 Rows          │
-│          (0.26s)          ││          (0.00s)          │
+│          (0.28s)          ││          (0.00s)          │
 └───────────────────────────┘└───────────────────────────┘
 

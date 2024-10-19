@@ -9,7 +9,7 @@ Run 1:
 EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.483s              ││
+││              Total Time: 0.485s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -84,7 +84,7 @@ Run 2:
 EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.231s              ││
+││              Total Time: 0.244s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -146,7 +146,7 @@ EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) 
 │   lo_quantity IS NOT NULL ││                           │
 │                           ││                           │
 │         42532 Rows        ││          31 Rows          │
-│          (0.21s)          ││          (0.00s)          │
+│          (0.22s)          ││          (0.00s)          │
 └───────────────────────────┘└───────────────────────────┘
 
 
@@ -159,7 +159,7 @@ Run 3:
 EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.228s              ││
+││              Total Time: 0.226s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -234,7 +234,7 @@ Run 4:
 EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.225s              ││
+││              Total Time: 0.231s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -296,7 +296,7 @@ EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) 
 │   lo_quantity IS NOT NULL ││                           │
 │                           ││                           │
 │         42532 Rows        ││          31 Rows          │
-│          (0.20s)          ││          (0.00s)          │
+│          (0.21s)          ││          (0.00s)          │
 └───────────────────────────┘└───────────────────────────┘
 
 
@@ -309,7 +309,7 @@ Run 5:
 EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) AS REVENUE         FROM             lineorder,             date         WHERE             LO_ORDERDATE = D_DATEKEY             AND D_YEARMONTHNUM = 199401             AND LO_DISCOUNT BETWEEN 4 AND 6             AND LO_QUANTITY BETWEEN 26 AND 35;         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.227s              ││
+││              Total Time: 0.240s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -371,6 +371,6 @@ EXPLAIN ANALYZE          SELECT             sum(LO_EXTENDEDPRICE * LO_DISCOUNT) 
 │   lo_quantity IS NOT NULL ││                           │
 │                           ││                           │
 │         42532 Rows        ││          31 Rows          │
-│          (0.20s)          ││          (0.00s)          │
+│          (0.21s)          ││          (0.00s)          │
 └───────────────────────────┘└───────────────────────────┘
 

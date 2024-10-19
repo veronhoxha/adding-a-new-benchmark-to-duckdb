@@ -9,7 +9,7 @@ Run 1:
 EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,             D_YEAR,             sum(LO_REVENUE) AS REVENUE         FROM             customer,             lineorder,             supplier,             date         WHERE             LO_CUSTKEY = C_CUSTKEY             AND LO_SUPPKEY = S_SUPPKEY             AND LO_ORDERDATE = D_DATEKEY             AND C_REGION = 'ASIA' AND S_REGION = 'ASIA'             AND D_YEAR >= 1992 AND D_YEAR <= 1997         GROUP BY             C_NATION,             S_NATION,             D_YEAR         ORDER BY             D_YEAR ASC,             REVENUE DESC;             
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.107s              ││
+││              Total Time: 0.110s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -180,7 +180,7 @@ EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,     
 │                           ││    s_region IS NOT NULL   │
 │                           ││                           │
 │        5435140 Rows       ││          449 Rows         │
-│          (0.06s)          ││          (0.00s)          │
+│          (0.07s)          ││          (0.00s)          │
 └───────────────────────────┘└───────────────────────────┘
 
 
@@ -193,7 +193,7 @@ Run 2:
 EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,             D_YEAR,             sum(LO_REVENUE) AS REVENUE         FROM             customer,             lineorder,             supplier,             date         WHERE             LO_CUSTKEY = C_CUSTKEY             AND LO_SUPPKEY = S_SUPPKEY             AND LO_ORDERDATE = D_DATEKEY             AND C_REGION = 'ASIA' AND S_REGION = 'ASIA'             AND D_YEAR >= 1992 AND D_YEAR <= 1997         GROUP BY             C_NATION,             S_NATION,             D_YEAR         ORDER BY             D_YEAR ASC,             REVENUE DESC;             
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0753s             ││
+││              Total Time: 0.0764s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -364,7 +364,7 @@ EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,     
 │                           ││    s_region IS NOT NULL   │
 │                           ││                           │
 │        5435140 Rows       ││          449 Rows         │
-│          (0.03s)          ││          (0.00s)          │
+│          (0.04s)          ││          (0.00s)          │
 └───────────────────────────┘└───────────────────────────┘
 
 
@@ -377,7 +377,7 @@ Run 3:
 EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,             D_YEAR,             sum(LO_REVENUE) AS REVENUE         FROM             customer,             lineorder,             supplier,             date         WHERE             LO_CUSTKEY = C_CUSTKEY             AND LO_SUPPKEY = S_SUPPKEY             AND LO_ORDERDATE = D_DATEKEY             AND C_REGION = 'ASIA' AND S_REGION = 'ASIA'             AND D_YEAR >= 1992 AND D_YEAR <= 1997         GROUP BY             C_NATION,             S_NATION,             D_YEAR         ORDER BY             D_YEAR ASC,             REVENUE DESC;             
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0768s             ││
+││              Total Time: 0.0751s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -561,7 +561,7 @@ Run 4:
 EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,             D_YEAR,             sum(LO_REVENUE) AS REVENUE         FROM             customer,             lineorder,             supplier,             date         WHERE             LO_CUSTKEY = C_CUSTKEY             AND LO_SUPPKEY = S_SUPPKEY             AND LO_ORDERDATE = D_DATEKEY             AND C_REGION = 'ASIA' AND S_REGION = 'ASIA'             AND D_YEAR >= 1992 AND D_YEAR <= 1997         GROUP BY             C_NATION,             S_NATION,             D_YEAR         ORDER BY             D_YEAR ASC,             REVENUE DESC;             
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0757s             ││
+││              Total Time: 0.0760s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -745,7 +745,7 @@ Run 5:
 EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,             D_YEAR,             sum(LO_REVENUE) AS REVENUE         FROM             customer,             lineorder,             supplier,             date         WHERE             LO_CUSTKEY = C_CUSTKEY             AND LO_SUPPKEY = S_SUPPKEY             AND LO_ORDERDATE = D_DATEKEY             AND C_REGION = 'ASIA' AND S_REGION = 'ASIA'             AND D_YEAR >= 1992 AND D_YEAR <= 1997         GROUP BY             C_NATION,             S_NATION,             D_YEAR         ORDER BY             D_YEAR ASC,             REVENUE DESC;             
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0756s             ││
+││              Total Time: 0.0757s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐

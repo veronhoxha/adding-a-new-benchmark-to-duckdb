@@ -9,7 +9,7 @@ Run 1:
 EXPLAIN ANALYZE          SELECT               D_YEAR,               S_CITY,               P_BRAND,               sum(LO_REVENUE - LO_SUPPLYCOST) AS profit         FROM               date,               customer,               supplier,               part,               lineorder         WHERE               LO_CUSTKEY = C_CUSTKEY               AND LO_SUPPKEY = S_SUPPKEY               AND LO_PARTKEY = P_PARTKEY               AND LO_ORDERDATE = D_DATEKEY               AND C_REGION = 'AMERICA'               AND S_NATION = 'UNITED STATES'               AND (D_YEAR = 1997 OR D_YEAR = 1998)               AND P_CATEGORY = 'MFGR#14'         GROUP BY               D_YEAR,               S_CITY,               P_BRAND         ORDER BY               D_YEAR,               S_CITY,               P_BRAND         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.125s              ││
+││              Total Time: 0.127s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -211,7 +211,7 @@ Run 2:
 EXPLAIN ANALYZE          SELECT               D_YEAR,               S_CITY,               P_BRAND,               sum(LO_REVENUE - LO_SUPPLYCOST) AS profit         FROM               date,               customer,               supplier,               part,               lineorder         WHERE               LO_CUSTKEY = C_CUSTKEY               AND LO_SUPPKEY = S_SUPPKEY               AND LO_PARTKEY = P_PARTKEY               AND LO_ORDERDATE = D_DATEKEY               AND C_REGION = 'AMERICA'               AND S_NATION = 'UNITED STATES'               AND (D_YEAR = 1997 OR D_YEAR = 1998)               AND P_CATEGORY = 'MFGR#14'         GROUP BY               D_YEAR,               S_CITY,               P_BRAND         ORDER BY               D_YEAR,               S_CITY,               P_BRAND         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0493s             ││
+││              Total Time: 0.0488s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -413,7 +413,7 @@ Run 3:
 EXPLAIN ANALYZE          SELECT               D_YEAR,               S_CITY,               P_BRAND,               sum(LO_REVENUE - LO_SUPPLYCOST) AS profit         FROM               date,               customer,               supplier,               part,               lineorder         WHERE               LO_CUSTKEY = C_CUSTKEY               AND LO_SUPPKEY = S_SUPPKEY               AND LO_PARTKEY = P_PARTKEY               AND LO_ORDERDATE = D_DATEKEY               AND C_REGION = 'AMERICA'               AND S_NATION = 'UNITED STATES'               AND (D_YEAR = 1997 OR D_YEAR = 1998)               AND P_CATEGORY = 'MFGR#14'         GROUP BY               D_YEAR,               S_CITY,               P_BRAND         ORDER BY               D_YEAR,               S_CITY,               P_BRAND         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0489s             ││
+││              Total Time: 0.0480s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -615,7 +615,7 @@ Run 4:
 EXPLAIN ANALYZE          SELECT               D_YEAR,               S_CITY,               P_BRAND,               sum(LO_REVENUE - LO_SUPPLYCOST) AS profit         FROM               date,               customer,               supplier,               part,               lineorder         WHERE               LO_CUSTKEY = C_CUSTKEY               AND LO_SUPPKEY = S_SUPPKEY               AND LO_PARTKEY = P_PARTKEY               AND LO_ORDERDATE = D_DATEKEY               AND C_REGION = 'AMERICA'               AND S_NATION = 'UNITED STATES'               AND (D_YEAR = 1997 OR D_YEAR = 1998)               AND P_CATEGORY = 'MFGR#14'         GROUP BY               D_YEAR,               S_CITY,               P_BRAND         ORDER BY               D_YEAR,               S_CITY,               P_BRAND         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0478s             ││
+││              Total Time: 0.0490s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -817,7 +817,7 @@ Run 5:
 EXPLAIN ANALYZE          SELECT               D_YEAR,               S_CITY,               P_BRAND,               sum(LO_REVENUE - LO_SUPPLYCOST) AS profit         FROM               date,               customer,               supplier,               part,               lineorder         WHERE               LO_CUSTKEY = C_CUSTKEY               AND LO_SUPPKEY = S_SUPPKEY               AND LO_PARTKEY = P_PARTKEY               AND LO_ORDERDATE = D_DATEKEY               AND C_REGION = 'AMERICA'               AND S_NATION = 'UNITED STATES'               AND (D_YEAR = 1997 OR D_YEAR = 1998)               AND P_CATEGORY = 'MFGR#14'         GROUP BY               D_YEAR,               S_CITY,               P_BRAND         ORDER BY               D_YEAR,               S_CITY,               P_BRAND         
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0472s             ││
+││              Total Time: 0.0482s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐

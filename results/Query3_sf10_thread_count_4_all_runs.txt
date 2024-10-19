@@ -9,7 +9,7 @@ Run 1:
 EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,             D_YEAR,             sum(LO_REVENUE) AS REVENUE         FROM             customer,             lineorder,             supplier,             date         WHERE             LO_CUSTKEY = C_CUSTKEY             AND LO_SUPPKEY = S_SUPPKEY             AND LO_ORDERDATE = D_DATEKEY             AND C_REGION = 'ASIA' AND S_REGION = 'ASIA'             AND D_YEAR >= 1992 AND D_YEAR <= 1997         GROUP BY             C_NATION,             S_NATION,             D_YEAR         ORDER BY             D_YEAR ASC,             REVENUE DESC;             
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.192s              ││
+││              Total Time: 0.193s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -191,7 +191,7 @@ Run 2:
 EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,             D_YEAR,             sum(LO_REVENUE) AS REVENUE         FROM             customer,             lineorder,             supplier,             date         WHERE             LO_CUSTKEY = C_CUSTKEY             AND LO_SUPPKEY = S_SUPPKEY             AND LO_ORDERDATE = D_DATEKEY             AND C_REGION = 'ASIA' AND S_REGION = 'ASIA'             AND D_YEAR >= 1992 AND D_YEAR <= 1997         GROUP BY             C_NATION,             S_NATION,             D_YEAR         ORDER BY             D_YEAR ASC,             REVENUE DESC;             
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.193s              ││
+││              Total Time: 0.192s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -373,7 +373,7 @@ Run 3:
 EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,             D_YEAR,             sum(LO_REVENUE) AS REVENUE         FROM             customer,             lineorder,             supplier,             date         WHERE             LO_CUSTKEY = C_CUSTKEY             AND LO_SUPPKEY = S_SUPPKEY             AND LO_ORDERDATE = D_DATEKEY             AND C_REGION = 'ASIA' AND S_REGION = 'ASIA'             AND D_YEAR >= 1992 AND D_YEAR <= 1997         GROUP BY             C_NATION,             S_NATION,             D_YEAR         ORDER BY             D_YEAR ASC,             REVENUE DESC;             
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.190s              ││
+││              Total Time: 0.194s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -495,7 +495,7 @@ EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,     
 │   Build Max: 1998-12-30   │                                                                        │
 │                           │                                                                        │
 │        2198974 Rows       │                                                                        │
-│          (0.03s)          │                                                                        │
+│          (0.04s)          │                                                                        │
 └─────────────┬─────────────┘                                                                        │
 ┌─────────────┴─────────────┐                                                          ┌─────────────┴─────────────┐
 │         HASH_JOIN         │                                                          │         TABLE_SCAN        │
@@ -542,7 +542,7 @@ EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,     
 │                           ││    s_region IS NOT NULL   ││    c_region IS NOT NULL   │
 │                           ││                           ││                           │
 │       54626046 Rows       ││         4001 Rows         ││         60535 Rows        │
-│          (0.34s)          ││          (0.00s)          ││          (0.00s)          │
+│          (0.35s)          ││          (0.00s)          ││          (0.00s)          │
 └───────────────────────────┘└───────────────────────────┘└───────────────────────────┘
 
 
@@ -555,7 +555,7 @@ Run 4:
 EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,             D_YEAR,             sum(LO_REVENUE) AS REVENUE         FROM             customer,             lineorder,             supplier,             date         WHERE             LO_CUSTKEY = C_CUSTKEY             AND LO_SUPPKEY = S_SUPPKEY             AND LO_ORDERDATE = D_DATEKEY             AND C_REGION = 'ASIA' AND S_REGION = 'ASIA'             AND D_YEAR >= 1992 AND D_YEAR <= 1997         GROUP BY             C_NATION,             S_NATION,             D_YEAR         ORDER BY             D_YEAR ASC,             REVENUE DESC;             
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.197s              ││
+││              Total Time: 0.196s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -737,7 +737,7 @@ Run 5:
 EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,             D_YEAR,             sum(LO_REVENUE) AS REVENUE         FROM             customer,             lineorder,             supplier,             date         WHERE             LO_CUSTKEY = C_CUSTKEY             AND LO_SUPPKEY = S_SUPPKEY             AND LO_ORDERDATE = D_DATEKEY             AND C_REGION = 'ASIA' AND S_REGION = 'ASIA'             AND D_YEAR >= 1992 AND D_YEAR <= 1997         GROUP BY             C_NATION,             S_NATION,             D_YEAR         ORDER BY             D_YEAR ASC,             REVENUE DESC;             
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.207s              ││
+││              Total Time: 0.192s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -845,7 +845,7 @@ EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,     
 │    l_utinyint(#9, 1992)   │
 │                           │
 │        2198974 Rows       │
-│          (0.08s)          │
+│          (0.06s)          │
 └─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
 │         HASH_JOIN         │
@@ -876,7 +876,7 @@ EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,     
 │                           │                                           │              │            NULL           │
 │                           │                                           │              │                           │
 │        2198974 Rows       │                                           │              │         2192 Rows         │
-│          (0.08s)          │                                           │              │          (0.00s)          │
+│          (0.07s)          │                                           │              │          (0.00s)          │
 └─────────────┬─────────────┘                                           │              └───────────────────────────┘
 ┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐
 │         HASH_JOIN         │                             │           FILTER          │
@@ -890,7 +890,7 @@ EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,     
 │      Build Max: 20000     │              │              │                           │
 │                           │              │              │                           │
 │       10937140 Rows       │              │              │         60535 Rows        │
-│          (0.16s)          │              │              │          (0.00s)          │
+│          (0.15s)          │              │              │          (0.00s)          │
 └─────────────┬─────────────┘              │              └─────────────┬─────────────┘
 ┌─────────────┴─────────────┐┌─────────────┴─────────────┐┌─────────────┴─────────────┐
 │         TABLE_SCAN        ││         TABLE_SCAN        ││         TABLE_SCAN        │
@@ -906,6 +906,6 @@ EXPLAIN ANALYZE          SELECT             C_NATION,             S_NATION,     
 │                           ││    s_region IS NOT NULL   ││    c_region IS NOT NULL   │
 │                           ││                           ││                           │
 │       54626046 Rows       ││         4001 Rows         ││         60535 Rows        │
-│          (0.36s)          ││          (0.00s)          ││          (0.00s)          │
+│          (0.35s)          ││          (0.00s)          ││          (0.00s)          │
 └───────────────────────────┘└───────────────────────────┘└───────────────────────────┘
 

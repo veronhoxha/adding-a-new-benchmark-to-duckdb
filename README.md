@@ -25,7 +25,7 @@ Located in the **"data"** folder:
 ### Additional Folders
 - `"databases"`: Due to the size of the .db files pushing them to the repo was ignored, however, three distinct databases get generated when the notebook is run.
 - `"images"`: Directory where images used in the report can be found.
-- `"results"`: Directory where the query profiling informations of each query ran with specfic scale factor and thread count are.
+- `"results"`: Directory where the query profiling informations of each query ran with specific scale factor and thread count are.
 
 
 ## Installation

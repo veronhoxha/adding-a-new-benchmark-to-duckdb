@@ -27,10 +27,23 @@ Located in the **"data"** folder:
 - `"images"`: Directory where images used in the report can be found.
 - `"results"`: Directory where the query profiling informations of each query ran with specific scale factor and thread count are.
 
-
 ## Installation
-Ensure Python 3.12.6 is installed (other versions might work as well, however this is the one I used) and then run:
-- `pip install -r requirements.txt`
+Prerequisites: Ensure Python 3.12.6 is installed on your machine. Other versions might work, but this project was developed with 3.12.6.
+
+**1. Create and Activate a Virtual Environment**
+
+Create a Virtual Environment in the root directory of this project by running the following commands:
+  - For macOS/Linux:
+      - ``python3 -m venv .venv``
+      - ``source .venv/bin/activate``
+  - For Windows:
+      - ``python -m venv .venv``
+      - ``.venv\Scripts\activate``
+
+**2. Install Required Packages**
+
+When the virtual environment is activated, install all necessary packages by running:
+  - `pip install -r requirements.txt`
 
 ## Usage
 To run the notebook and recreate results:
